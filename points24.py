@@ -6,6 +6,7 @@ import random
 from Tkinter import *
 from PIL import Image, ImageTk
 from comput24 import *
+import sys, os
 
 point = {'♠A': 1, '♠2': 2, '♠3': 3, '♠4': 4, '♠5': 5, '♠6': 6, '♠7': 7, '♠8': 8, '♠9': 9, '♠10': 10, '♠J': 10, '♠Q': 10, '♠K': 10,
         '♥A': 1, '♥2': 2, '♥3': 3, '♥4': 4, '♥5': 5, '♥6': 6, '♥7': 7, '♥8': 8, '♥9': 9, '♥10': 10, '♥J': 10, '♥Q': 10, '♥K': 10,
@@ -23,6 +24,16 @@ games = []
 puke4 = []
 puke_img4 = []
 game4 = []
+
+if getattr(sys, 'frozen', False):
+    # running in a bundle
+    #work_dir = repr(os.path.dirname(os.path.realpath(sys.executable))).strip("'") +'/'
+    work_dir = sys._MEIPASS + '/'
+    #print(sys._MEIPASS)
+    #print(os.listdir(sys._MEIPASS))
+else:
+    # running live
+    work_dir = ''
 
 root = Tk()
 root.title('算24/Points24（©H20180529）')
@@ -43,7 +54,7 @@ def bu1Button():
 
     image_file4 = []
     for img in puke_img4:
-        image_file4.append(Image.open(r'images/' + img))
+        image_file4.append(Image.open(work_dir + r'images/' + img))
     target = Image.new('RGB', (420, 150))
     left = 0
     right = 105
@@ -84,10 +95,10 @@ te1.pack()
 bu2 = Button(root, text='答案/Answers', command=bu2Button).pack()
 
 image_file4 = []
-image_file4.append(Image.open(r'images/54.jpg'))
-image_file4.append(Image.open(r'images/54.jpg'))
-image_file4.append(Image.open(r'images/53.jpg'))
-image_file4.append(Image.open(r'images/53.jpg'))
+image_file4.append(Image.open(work_dir + r'images/54.jpg'))
+image_file4.append(Image.open(work_dir + r'images/54.jpg'))
+image_file4.append(Image.open(work_dir + r'images/53.jpg'))
+image_file4.append(Image.open(work_dir + r'images/53.jpg'))
 target = Image.new('RGB', (420, 150))
 left = 0
 right = 105
